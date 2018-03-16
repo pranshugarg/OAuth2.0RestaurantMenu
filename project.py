@@ -15,10 +15,10 @@ import random,string
 
 @app.route('/login')
 def showLogin():
-  state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange 32)
+  state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange (32))
   login_session['state'] = state
-  return "The current session state is %s" &=% login_session['state']
-
+  #return "The current session state is %s" % login_session['state']
+  return render_template('login.html')
 #Connect to Database and create database session
 engine = create_engine('sqlite:///restaurantmenu.db')
 Base.metadata.bind = engine
