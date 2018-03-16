@@ -5,6 +5,19 @@ from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, MenuItem
 
+#new imports for generating unique session tokens.
+
+from flask import session as login_session
+import random,string 
+
+#create a state token to prevent request.
+#store it in session for later validation
+
+@app.route('/login')
+def showLogin():
+  state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange 32)
+  login_session['state'] = state
+  return "The current session state is %s" &=% login_session['state']
 
 #Connect to Database and create database session
 engine = create_engine('sqlite:///restaurantmenu.db')
